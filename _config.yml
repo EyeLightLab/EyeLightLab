@@ -1,6 +1,6 @@
 # Setup
-title: Dark Poole
-url: https://getpoole.com
+title: EyeLight Data Scidence Lab
+url: https://eyelightlab.github.io/
 paginate: 1
 baseurl: ""
 permalink: pretty
@@ -32,17 +32,17 @@ sass:
 
 # Specify the author for blog posts
 author:
-  name: Mark Otto
-  url: https://twitter.com/mdo
-  email: markdotto@gmail.com
+  name: Young Kook Kim, MD, PhD
+  url: https://snucm.elsevierpure.com/en/persons/y-kim-41
+  email: eyedry@snu.ac.kr
 
 # Custom vars
 version: 3.0.0
 
 # Navbar page list
 nav:
-  - title: Blog
-    url: /archive
+  - title: Research Profile
+    url: https://snucm.elsevierpure.com/en/persons/y-kim-41
 
-  - title: About
-    url: /about
+  - title: Seoul National University Hospital (SNUH)
+    url: http://www.snuh.org/global/en/blog/01089/paper.do?scsContCnt=0&schContCnt=0&carContCnt=0&socContCnt=0&dr_cd=01089
