@@ -3,7 +3,7 @@ layout: null
 permalink: /card/
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,288 +11,286 @@ permalink: /card/
 <meta name="description" content="Digital business card of Young Kook Kim, MD, PhD, FRCSEd — Professor of Ophthalmology, Seoul National University Hospital.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Inter:wght@400;500;600&family=Noto+Serif+KR:wght@500;600&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy-1: #0c1b2c;
-    --navy-2: #16324f;
-    --gold: #c9a962;
-    --gold-soft: #d9c08a;
-    --ink: #1d2733;
-    --ink-soft: #5a6675;
-    --line: #e6e9ee;
-    --card-bg: #ffffff;
-    --page-bg: #eef1f5;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --page-bg: #10151c; }
+    --navy: #46536b;        /* slate navy from SNU MEDICINE logo */
+    --navy-deep: #37425a;
+    --navy-back: #47587a;   /* back-side card */
+    --green: #728c83;       /* MEDICINE green */
+    --gold: #e5b04f;        /* template accent bar */
+    --ink: #3a4356;
+    --ink-soft: #7d8698;
+    --line: #e9ebf0;
+    --page-1: #3c4a66;
+    --page-2: #2a344a;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; }
+  html, body { min-height: 100%; }
   body {
     font-family: "Inter", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: var(--page-bg);
+    background: linear-gradient(170deg, var(--page-1), var(--page-2));
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 28px 16px;
+    padding: 30px 18px 34px;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* ── Vertical card ─────────────────────────────── */
-  .card {
-    width: 100%;
-    max-width: 390px;
-    background: var(--card-bg);
-    border-radius: 26px;
+  /* ── Flip stage ─────────────────────────────── */
+  .stage {
+    width: min(370px, 100%);
+    aspect-ratio: 55 / 92;
+    perspective: 1400px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .flipper {
+    position: relative;
+    width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    transition: transform .7s cubic-bezier(.35, .1, .2, 1);
+  }
+  .stage.flipped .flipper { transform: rotateY(180deg); }
+  .face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 24px 60px rgba(12, 27, 44, .28), 0 4px 14px rgba(12, 27, 44, .14);
+    box-shadow: 0 26px 60px rgba(14, 20, 34, .45), 0 6px 16px rgba(14, 20, 34, .3);
   }
 
-  /* Top band */
-  .card-top {
-    position: relative;
-    background: linear-gradient(168deg, var(--navy-2) 0%, var(--navy-1) 72%);
-    color: #f5f7fa;
-    text-align: center;
-    padding: 44px 30px 34px;
-    overflow: hidden;
+  /* ── Front ──────────────────────────────────── */
+  .front {
+    background: #ffffff;
+    color: var(--ink);
+    display: flex;
+    flex-direction: column;
+    padding: 26px 28px 30px;
   }
-  .card-top::before {
+  .front .logo { align-self: flex-end; }
+  .front .logo img { display: block; height: 74px; width: auto; }
+  .front .spacer { flex: 1; }
+
+  .name-block { position: relative; padding: 2px 0 0; }
+  .name-block::before {
     content: "";
     position: absolute;
-    top: -140px; right: -120px;
-    width: 320px; height: 320px;
-    border-radius: 50%;
-    border: 1px solid rgba(201, 169, 98, .22);
-    box-shadow: 0 0 0 34px rgba(201, 169, 98, .07), 0 0 0 78px rgba(255, 255, 255, .04);
-    pointer-events: none;
+    left: -28px; top: 0;
+    width: 5px; height: 100%;
+    background: var(--gold);
+    border-radius: 0 3px 3px 0;
   }
-  .eye-mark { width: 46px; height: 46px; margin-bottom: 18px; opacity: .95; }
-  .name {
-    font-family: "Playfair Display", "Noto Serif KR", serif;
-    font-size: 27px;
-    font-weight: 600;
-    letter-spacing: .02em;
-    line-height: 1.2;
-  }
-  .degrees {
-    margin-top: 7px;
-    font-size: 12.5px;
-    font-weight: 500;
-    letter-spacing: .14em;
-    text-transform: uppercase;
-    color: var(--gold-soft);
-  }
-  .role { margin-top: 20px; font-size: 14.5px; font-weight: 500; letter-spacing: .02em; }
-  .affil { margin-top: 9px; font-size: 12.5px; line-height: 1.65; color: rgba(245, 247, 250, .78); }
-
-  /* Korean block */
-  .card-kr {
-    text-align: center;
-    padding: 24px 30px 22px;
-    border-bottom: 1px solid var(--line);
-  }
-  .kr-name {
-    font-family: "Noto Serif KR", serif;
-    font-size: 21px;
-    font-weight: 600;
-    color: var(--ink);
-    letter-spacing: .06em;
-  }
-  .kr-name small {
-    font-size: 13.5px;
-    font-weight: 500;
-    color: var(--ink-soft);
-    letter-spacing: .04em;
-    margin-left: 7px;
-  }
-  .kr-affil {
-    margin-top: 8px;
+  .name-kr {
     font-family: "Noto Sans KR", sans-serif;
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--ink-soft);
+    font-size: 27px;
+    font-weight: 700;
+    color: var(--navy-deep);
+    letter-spacing: .045em;
+    line-height: 1.15;
   }
+  .name-en { font-size: 12.5px; font-weight: 500; color: var(--ink-soft); margin-left: 8px; letter-spacing: .01em; }
+  .creds { margin-top: 5px; font-size: 11px; font-weight: 600; letter-spacing: .12em; color: var(--green); text-transform: uppercase; }
+  .role  { margin-top: 4px; font-size: 12.5px; color: var(--ink-soft); }
 
-  /* Contact rows */
-  .contacts { padding: 10px 26px; }
-  .contact {
+  .rows { margin-top: 22px; display: flex; flex-direction: column; gap: 18px; }
+  .group { display: flex; flex-direction: column; gap: 7px; }
+  .row {
     display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 13px 4px;
-    text-decoration: none;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12.5px;
+    line-height: 1.5;
     color: var(--ink);
-    border-bottom: 1px solid var(--line);
+    text-decoration: none;
   }
-  .contact:last-child { border-bottom: none; }
-  .contact .ico {
-    flex: none;
-    width: 34px; height: 34px;
-    border-radius: 10px;
-    background: #f2f4f8;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--navy-2);
-  }
-  .contact .ico svg { width: 17px; height: 17px; }
-  .contact .txt { min-width: 0; }
-  .contact .label {
-    font-size: 10.5px;
-    font-weight: 600;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-  .contact .value {
-    font-size: 13.5px;
-    font-weight: 500;
-    margin-top: 2px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .contact:hover .value { color: var(--navy-2); }
+  .row .ic { flex: none; width: 14px; height: 14px; margin-top: 2px; color: var(--gold); }
+  .row .ic svg { display: block; width: 100%; height: 100%; }
+  .row small { display: block; font-size: 11px; color: var(--ink-soft); margin-top: 1px; }
+  a.row:hover, a.row:hover small { color: var(--navy); }
 
-  /* Actions */
-  .actions { display: flex; gap: 10px; padding: 8px 26px 22px; }
+  /* ── Back ───────────────────────────────────── */
+  .back {
+    background: linear-gradient(178deg, var(--navy-back), var(--navy-deep));
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 28px;
+  }
+  .back .logo-chip {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 30px;
+    box-shadow: 0 10px 30px rgba(10, 15, 28, .35);
+  }
+  .back .logo-chip img { display: block; height: 96px; width: auto; }
+  .back-bottom {
+    position: absolute;
+    left: 28px; right: 24px; bottom: 26px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .back-tag { position: relative; color: #eef1f6; }
+  .back-tag::before {
+    content: "";
+    position: absolute;
+    left: -28px; top: 2px; bottom: 2px;
+    width: 5px;
+    background: var(--gold);
+    border-radius: 0 3px 3px 0;
+  }
+  .back-tag p { font-size: 13px; font-weight: 700; letter-spacing: .22em; line-height: 1.7; }
+  .back-tag small { display: block; margin-top: 6px; font-size: 10px; letter-spacing: .06em; color: rgba(238, 241, 246, .65); }
+  .qr-chip {
+    flex: none;
+    width: 78px; height: 78px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 7px;
+    color: var(--navy-deep);
+  }
+  .qr-chip svg { display: block; width: 100%; height: 100%; }
+
+  /* ── Below the card ─────────────────────────── */
+  .hint { margin-top: 16px; font-size: 11.5px; letter-spacing: .04em; color: rgba(238, 241, 246, .6); }
+  .actions {
+    width: min(370px, 100%);
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+  }
   .btn {
     flex: 1;
     display: flex; align-items: center; justify-content: center; gap: 8px;
     padding: 13px 10px;
-    border-radius: 13px;
+    border-radius: 12px;
     font-size: 13.5px;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     letter-spacing: .01em;
   }
   .btn svg { width: 16px; height: 16px; }
-  .btn-primary { background: var(--navy-1); color: #fff; }
-  .btn-primary:hover { background: var(--navy-2); }
-  .btn-ghost { border: 1.5px solid var(--line); color: var(--ink); }
-  .btn-ghost:hover { border-color: var(--navy-2); color: var(--navy-2); }
+  .btn-gold { background: var(--gold); color: #33405c; }
+  .btn-gold:hover { filter: brightness(1.06); }
+  .btn-ghost { border: 1.5px solid rgba(238, 241, 246, .45); color: #eef1f6; }
+  .btn-ghost:hover { border-color: #eef1f6; }
 
-  /* QR footer */
-  .card-foot {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 18px 26px 24px;
-    border-top: 1px solid var(--line);
-    background: #fafbfc;
-  }
-  .qr {
-    flex: none;
-    width: 76px; height: 76px;
-    padding: 7px;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    color: var(--navy-1);
-  }
-  .qr svg { display: block; width: 100%; height: 100%; }
-  .foot-txt { font-size: 12px; line-height: 1.6; color: var(--ink-soft); }
-  .foot-txt strong { display: block; color: var(--ink); font-weight: 600; font-size: 12.5px; }
-
-  /* Print: portrait name-card proportions */
   @media print {
     body { background: #fff; padding: 0; }
-    .card { max-width: 60mm; box-shadow: none; border: 1px solid #ddd; border-radius: 0; }
-    .actions { display: none; }
+    .stage { width: 60mm; box-shadow: none; cursor: default; }
+    .face { box-shadow: none; border: 1px solid #ddd; border-radius: 0; }
+    .hint, .actions { display: none; }
   }
 </style>
 </head>
 <body>
 
-<main class="card">
+<div class="stage" id="stage" role="button" tabindex="0"
+     aria-label="Business card — tap to flip / 명함 — 탭하면 뒤집힙니다">
+  <div class="flipper">
 
-  <section class="card-top">
-    <svg class="eye-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-      <path d="M4 24C4 24 12 11 24 11C36 11 44 24 44 24C44 24 36 37 24 37C12 37 4 24 4 24Z" stroke="#c9a962" stroke-width="2" stroke-linejoin="round"/>
-      <circle cx="24" cy="24" r="7.5" stroke="#c9a962" stroke-width="2"/>
-      <circle cx="24" cy="24" r="2.6" fill="#c9a962"/>
-    </svg>
-    <h1 class="name">Young Kook Kim</h1>
-    <p class="degrees">MD&nbsp;·&nbsp;PhD&nbsp;·&nbsp;FRCSEd</p>
-    <p class="role">Professor of Ophthalmology</p>
-    <p class="affil">
-      Department of Ophthalmology<br>
-      Seoul National University Hospital<br>
-      Seoul National University College of Medicine
-    </p>
-  </section>
+    <!-- Front -->
+    <section class="face front">
+      <div class="logo">
+        <img src="{{ '/assets/snu-medicine.png' | relative_url }}" alt="SNU Medicine">
+      </div>
+      <div class="spacer"></div>
 
-  <section class="card-kr">
-    <p class="kr-name" lang="ko">김영국 <small>교수</small></p>
-    <p class="kr-affil" lang="ko">
-      서울대학교병원 안과<br>
-      서울대학교 의과대학 의학과
-    </p>
-  </section>
+      <div class="name-block">
+        <h1 class="name-kr">김영국 <span class="name-en">Young Kook Kim</span></h1>
+        <p class="creds">MD · PhD · FRCSEd</p>
+        <p class="role">교수 · Professor of Ophthalmology</p>
+      </div>
 
-  <nav class="contacts">
-    <a class="contact" href="mailto:eyedry@snu.ac.kr">
-      <span class="ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-      </span>
-      <span class="txt">
-        <span class="label">Email</span>
-        <span class="value">eyedry@snu.ac.kr</span>
-      </span>
-    </a>
-    <a class="contact" href="https://snucm.elsevierpure.com/en/persons/y-kim-41" target="_blank" rel="noopener">
-      <span class="ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
-      </span>
-      <span class="txt">
-        <span class="label">Research Profile</span>
-        <span class="value">snucm.elsevierpure.com</span>
-      </span>
-    </a>
-    <a class="contact" href="http://www.snuh.org/global/en/blog/01089/paper.do?scsContCnt=0&amp;schContCnt=0&amp;carContCnt=0&amp;socContCnt=0&amp;dr_cd=01089" target="_blank" rel="noopener">
-      <span class="ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M12 9v4"/><path d="M10 11h4"/></svg>
-      </span>
-      <span class="txt">
-        <span class="label">SNUH Profile</span>
-        <span class="value">snuh.org</span>
-      </span>
-    </a>
-    <a class="contact" href="https://eyelightlab.github.io/" target="_blank" rel="noopener">
-      <span class="ico">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-      </span>
-      <span class="txt">
-        <span class="label">EyeLight Lab</span>
-        <span class="value">eyelightlab.github.io</span>
-      </span>
-    </a>
-  </nav>
+      <div class="rows">
+        <div class="group">
+          <a class="row" href="mailto:eyedry@snu.ac.kr">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>
+            <span>eyedry@snu.ac.kr</span>
+          </a>
+        </div>
 
-  <div class="actions">
-    <a class="btn btn-primary" href="{{ '/assets/young-kook-kim.vcf' | relative_url }}" download="Young-Kook-Kim.vcf">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      Save Contact
-    </a>
-    <a class="btn btn-ghost" href="mailto:eyedry@snu.ac.kr">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-      Email
-    </a>
+        <div class="group">
+          <div class="row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M12 9v4"/><path d="M10 11h4"/></svg></span>
+            <span>서울대학교병원 안과<small>Department of Ophthalmology, Seoul National University Hospital</small></span>
+          </div>
+          <div class="row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg></span>
+            <span>서울대학교 의과대학 의학과<small>Seoul National University College of Medicine</small></span>
+          </div>
+          <div class="row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <span>서울특별시 종로구 대학로 101 (03080)<small>101 Daehak-ro, Jongno-gu, Seoul, Republic of Korea</small></span>
+          </div>
+        </div>
+
+        <div class="group">
+          <a class="row" href="https://eyelightlab.github.io/" target="_blank" rel="noopener">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+            <span>eyelightlab.github.io — EyeLight Data Science Lab</span>
+          </a>
+          <a class="row" href="https://snucm.elsevierpure.com/en/persons/y-kim-41" target="_blank" rel="noopener">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg></span>
+            <span>Research Profile — snucm.elsevierpure.com</span>
+          </a>
+          <a class="row" href="http://www.snuh.org/global/en/blog/01089/paper.do?scsContCnt=0&amp;schContCnt=0&amp;carContCnt=0&amp;socContCnt=0&amp;dr_cd=01089" target="_blank" rel="noopener">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/></svg></span>
+            <span>SNUH Profile — snuh.org</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back -->
+    <section class="face back">
+      <div class="logo-chip">
+        <img src="{{ '/assets/snu-medicine.png' | relative_url }}" alt="SNU Medicine">
+      </div>
+      <div class="back-bottom">
+        <div class="back-tag">
+          <p>EYELIGHT<br>DATA SCIENCE<br>LAB</p>
+          <small>eyelightlab.github.io/card</small>
+        </div>
+        <span class="qr-chip" aria-label="QR code linking to this card">
+          <svg viewBox="0 0 29 29" shape-rendering="crispEdges" fill="currentColor" role="img">
+            <path d="M0 0h7v1h-7zM9 0h1v1h-1zM14 0h1v1h-1zM19 0h1v1h-1zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM12 1h2v1h-2zM17 1h4v1h-4zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM10 2h2v1h-2zM15 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h2v1h-2zM13 3h1v1h-1zM18 3h1v1h-1zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h2v1h-2zM11 4h3v1h-3zM16 4h4v1h-4zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM10 5h1v1h-1zM14 5h4v1h-4zM19 5h2v1h-2zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM10 7h3v1h-3zM16 7h2v1h-2zM20 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM9 8h2v1h-2zM15 8h3v1h-3zM20 8h1v1h-1zM24 8h1v1h-1zM27 8h1v1h-1zM4 9h2v1h-2zM7 9h7v1h-7zM17 9h2v1h-2zM20 9h3v1h-3zM25 9h1v1h-1zM28 9h1v1h-1zM2 10h3v1h-3zM6 10h4v1h-4zM14 10h1v1h-1zM16 10h1v1h-1zM20 10h1v1h-1zM24 10h1v1h-1zM26 10h3v1h-3zM3 11h1v1h-1zM7 11h2v1h-2zM11 11h8v1h-8zM20 11h1v1h-1zM24 11h1v1h-1zM27 11h1v1h-1zM3 12h2v1h-2zM6 12h1v1h-1zM9 12h3v1h-3zM14 12h1v1h-1zM16 12h2v1h-2zM19 12h4v1h-4zM25 12h1v1h-1zM27 12h2v1h-2zM0 13h1v1h-1zM2 13h1v1h-1zM7 13h1v1h-1zM9 13h2v1h-2zM12 13h1v1h-1zM14 13h1v1h-1zM16 13h2v1h-2zM21 13h2v1h-2zM25 13h1v1h-1zM28 13h1v1h-1zM1 14h1v1h-1zM5 14h3v1h-3zM9 14h1v1h-1zM13 14h1v1h-1zM16 14h3v1h-3zM20 14h6v1h-6zM27 14h2v1h-2zM0 15h3v1h-3zM4 15h2v1h-2zM8 15h1v1h-1zM10 15h1v1h-1zM12 15h1v1h-1zM17 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM3 16h1v1h-1zM6 16h1v1h-1zM9 16h1v1h-1zM12 16h1v1h-1zM17 16h2v1h-2zM20 16h3v1h-3zM25 16h1v1h-1zM27 16h2v1h-2zM2 17h2v1h-2zM7 17h1v1h-1zM9 17h1v1h-1zM11 17h3v1h-3zM16 17h1v1h-1zM20 17h3v1h-3zM25 17h2v1h-2zM28 17h1v1h-1zM0 18h1v1h-1zM3 18h8v1h-8zM14 18h1v1h-1zM17 18h1v1h-1zM23 18h2v1h-2zM27 18h2v1h-2zM1 19h1v1h-1zM4 19h2v1h-2zM7 19h1v1h-1zM9 19h1v1h-1zM11 19h1v1h-1zM13 19h3v1h-3zM17 19h1v1h-1zM19 19h1v1h-1zM21 19h1v1h-1zM23 19h3v1h-3zM27 19h1v1h-1zM0 20h1v1h-1zM2 20h5v1h-5zM8 20h1v1h-1zM12 20h1v1h-1zM14 20h1v1h-1zM16 20h2v1h-2zM20 20h5v1h-5zM8 21h1v1h-1zM10 21h2v1h-2zM14 21h1v1h-1zM16 21h1v1h-1zM19 21h2v1h-2zM24 21h1v1h-1zM26 21h3v1h-3zM0 22h7v1h-7zM9 22h3v1h-3zM13 22h1v1h-1zM18 22h3v1h-3zM22 22h1v1h-1zM24 22h2v1h-2zM27 22h2v1h-2zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM17 23h2v1h-2zM20 23h1v1h-1zM24 23h2v1h-2zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM8 24h2v1h-2zM11 24h2v1h-2zM16 24h2v1h-2zM20 24h5v1h-5zM28 24h1v1h-1zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM10 25h1v1h-1zM12 25h1v1h-1zM16 25h1v1h-1zM19 25h1v1h-1zM24 25h1v1h-1zM26 25h3v1h-3zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM8 26h1v1h-1zM11 26h1v1h-1zM14 26h1v1h-1zM17 26h1v1h-1zM19 26h1v1h-1zM21 26h1v1h-1zM23 26h3v1h-3zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM10 27h1v1h-1zM12 27h3v1h-3zM16 27h5v1h-5zM27 27h1v1h-1zM0 28h7v1h-7zM8 28h4v1h-4zM13 28h1v1h-1zM15 28h6v1h-6zM22 28h3v1h-3zM27 28h2v1h-2z"/>
+          </svg>
+        </span>
+      </div>
+    </section>
+
   </div>
+</div>
 
-  <footer class="card-foot">
-    <span class="qr" aria-label="QR code linking to this card">
-      <svg viewBox="0 0 29 29" shape-rendering="crispEdges" fill="currentColor" role="img">
-        <path d="M0 0h7v1h-7zM9 0h1v1h-1zM14 0h1v1h-1zM19 0h1v1h-1zM22 0h7v1h-7zM0 1h1v1h-1zM6 1h1v1h-1zM8 1h1v1h-1zM12 1h2v1h-2zM17 1h4v1h-4zM22 1h1v1h-1zM28 1h1v1h-1zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h1v1h-1zM10 2h2v1h-2zM15 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM22 2h1v1h-1zM24 2h3v1h-3zM28 2h1v1h-1zM0 3h1v1h-1zM2 3h3v1h-3zM6 3h1v1h-1zM9 3h2v1h-2zM13 3h1v1h-1zM18 3h1v1h-1zM22 3h1v1h-1zM24 3h3v1h-3zM28 3h1v1h-1zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM8 4h2v1h-2zM11 4h3v1h-3zM16 4h4v1h-4zM22 4h1v1h-1zM24 4h3v1h-3zM28 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM10 5h1v1h-1zM14 5h4v1h-4zM19 5h2v1h-2zM22 5h1v1h-1zM28 5h1v1h-1zM0 6h7v1h-7zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM20 6h1v1h-1zM22 6h7v1h-7zM10 7h3v1h-3zM16 7h2v1h-2zM20 7h1v1h-1zM0 8h1v1h-1zM2 8h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM9 8h2v1h-2zM15 8h3v1h-3zM20 8h1v1h-1zM24 8h1v1h-1zM27 8h1v1h-1zM4 9h2v1h-2zM7 9h7v1h-7zM17 9h2v1h-2zM20 9h3v1h-3zM25 9h1v1h-1zM28 9h1v1h-1zM2 10h3v1h-3zM6 10h4v1h-4zM14 10h1v1h-1zM16 10h1v1h-1zM20 10h1v1h-1zM24 10h1v1h-1zM26 10h3v1h-3zM3 11h1v1h-1zM7 11h2v1h-2zM11 11h8v1h-8zM20 11h1v1h-1zM24 11h1v1h-1zM27 11h1v1h-1zM3 12h2v1h-2zM6 12h1v1h-1zM9 12h3v1h-3zM14 12h1v1h-1zM16 12h2v1h-2zM19 12h4v1h-4zM25 12h1v1h-1zM27 12h2v1h-2zM0 13h1v1h-1zM2 13h1v1h-1zM7 13h1v1h-1zM9 13h2v1h-2zM12 13h1v1h-1zM14 13h1v1h-1zM16 13h2v1h-2zM21 13h2v1h-2zM25 13h1v1h-1zM28 13h1v1h-1zM1 14h1v1h-1zM5 14h3v1h-3zM9 14h1v1h-1zM13 14h1v1h-1zM16 14h3v1h-3zM20 14h6v1h-6zM27 14h2v1h-2zM0 15h3v1h-3zM4 15h2v1h-2zM8 15h1v1h-1zM10 15h1v1h-1zM12 15h1v1h-1zM17 15h1v1h-1zM22 15h1v1h-1zM25 15h1v1h-1zM27 15h1v1h-1zM3 16h1v1h-1zM6 16h1v1h-1zM9 16h1v1h-1zM12 16h1v1h-1zM17 16h2v1h-2zM20 16h3v1h-3zM25 16h1v1h-1zM27 16h2v1h-2zM2 17h2v1h-2zM7 17h1v1h-1zM9 17h1v1h-1zM11 17h3v1h-3zM16 17h1v1h-1zM20 17h3v1h-3zM25 17h2v1h-2zM28 17h1v1h-1zM0 18h1v1h-1zM3 18h8v1h-8zM14 18h1v1h-1zM17 18h1v1h-1zM23 18h2v1h-2zM27 18h2v1h-2zM1 19h1v1h-1zM4 19h2v1h-2zM7 19h1v1h-1zM9 19h1v1h-1zM11 19h1v1h-1zM13 19h3v1h-3zM17 19h1v1h-1zM19 19h1v1h-1zM21 19h1v1h-1zM23 19h3v1h-3zM27 19h1v1h-1zM0 20h1v1h-1zM2 20h5v1h-5zM8 20h1v1h-1zM12 20h1v1h-1zM14 20h1v1h-1zM16 20h2v1h-2zM20 20h5v1h-5zM8 21h1v1h-1zM10 21h2v1h-2zM14 21h1v1h-1zM16 21h1v1h-1zM19 21h2v1h-2zM24 21h1v1h-1zM26 21h3v1h-3zM0 22h7v1h-7zM9 22h3v1h-3zM13 22h1v1h-1zM18 22h3v1h-3zM22 22h1v1h-1zM24 22h2v1h-2zM27 22h2v1h-2zM0 23h1v1h-1zM6 23h1v1h-1zM9 23h3v1h-3zM17 23h2v1h-2zM20 23h1v1h-1zM24 23h2v1h-2zM28 23h1v1h-1zM0 24h1v1h-1zM2 24h3v1h-3zM6 24h1v1h-1zM8 24h2v1h-2zM11 24h2v1h-2zM16 24h2v1h-2zM20 24h5v1h-5zM28 24h1v1h-1zM0 25h1v1h-1zM2 25h3v1h-3zM6 25h1v1h-1zM10 25h1v1h-1zM12 25h1v1h-1zM16 25h1v1h-1zM19 25h1v1h-1zM24 25h1v1h-1zM26 25h3v1h-3zM0 26h1v1h-1zM2 26h3v1h-3zM6 26h1v1h-1zM8 26h1v1h-1zM11 26h1v1h-1zM14 26h1v1h-1zM17 26h1v1h-1zM19 26h1v1h-1zM21 26h1v1h-1zM23 26h3v1h-3zM28 26h1v1h-1zM0 27h1v1h-1zM6 27h1v1h-1zM10 27h1v1h-1zM12 27h3v1h-3zM16 27h5v1h-5zM27 27h1v1h-1zM0 28h7v1h-7zM8 28h4v1h-4zM13 28h1v1h-1zM15 28h6v1h-6zM22 28h3v1h-3zM27 28h2v1h-2z"/>
-      </svg>
-    </span>
-    <p class="foot-txt">
-      <strong>Scan to open this card</strong>
-      eyelightlab.github.io/card
-    </p>
-  </footer>
+<p class="hint">카드를 탭하면 뒷면이 보입니다 · Tap card to flip</p>
 
-</main>
+<div class="actions">
+  <a class="btn btn-gold" href="{{ '/assets/young-kook-kim.vcf' | relative_url }}" download="Young-Kook-Kim.vcf">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Save Contact
+  </a>
+  <a class="btn btn-ghost" href="mailto:eyedry@snu.ac.kr">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+    Email
+  </a>
+</div>
+
+<script>
+  var stage = document.getElementById('stage');
+  function flip() { stage.classList.toggle('flipped'); }
+  stage.addEventListener('click', flip);
+  stage.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); flip(); }
+  });
+</script>
 
 </body>
 </html>
