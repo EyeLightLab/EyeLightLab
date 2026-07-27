@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Kim;Young Kook;;Prof.;MD PhD FRCSEd
+FN:Young Kook Kim
+ORG:Seoul National University Hospital;Department of Ophthalmology
+TITLE:Professor of Ophthalmology
+EMAIL;TYPE=INTERNET,WORK:eyedry@snu.ac.kr
+URL:https://eyelightlab.github.io/
+URL:https://snucm.elsevierpure.com/en/persons/y-kim-41
+ADR;TYPE=WORK:;;101 Daehak-ro\, Jongno-gu;Seoul;;03080;Republic of Korea
+NOTE:김영국 교수 · 서울대학교병원 안과 · 서울대학교 의과대학 의학과
+END:VCARD
